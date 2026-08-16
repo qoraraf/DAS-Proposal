@@ -31,8 +31,8 @@ img{display:block;width:100%;height:100%;object-fit:cover}
 /* ---------- chrome ---------- */
 #bar{position:fixed;top:0;left:0;height:4px;background:linear-gradient(90deg,var(--teal),var(--gold));width:0;z-index:60;transition:width .45s cubic-bezier(.2,.7,.2,1)}
 #top{position:fixed;top:0;left:0;right:0;height:58px;display:flex;align-items:center;justify-content:space-between;padding:0 26px;z-index:50;background:rgba(246,248,247,.86);backdrop-filter:blur(10px);border-bottom:1px solid var(--line)}
-#top .brand{display:flex;align-items:center;gap:10px;font-family:'Sora';font-weight:800;font-size:14px;letter-spacing:.12em}
-#top .brand svg{flex:none}
+#top .brand{display:flex;align-items:center;gap:12px;font-family:'Sora';font-weight:800;font-size:14px;letter-spacing:.12em}
+.brandLogo{height:38px;width:auto;object-fit:contain;flex:none}
 #top .ctx{font-size:11.5px;font-weight:600;color:var(--mut);letter-spacing:.08em;text-transform:uppercase}
 #bot{position:fixed;bottom:0;left:0;right:0;height:52px;display:flex;align-items:center;justify-content:space-between;padding:0 26px;z-index:50;background:rgba(246,248,247,.86);backdrop-filter:blur(10px);border-top:1px solid var(--line)}
 #hint{font-size:11px;color:var(--mut);letter-spacing:.05em}
@@ -214,6 +214,7 @@ table.mx{width:100%;border-collapse:collapse;margin-top:18px;background:#fff;bor
 .step p{font-size:12px;color:var(--mut);line-height:1.55}
 .close{margin-top:24px;text-align:center}
 .close p{margin-top:6px}
+.closeLogo{height:48px;width:auto;object-fit:contain;margin:0 auto 12px}
 
 /* index overlay */
 #idx{position:fixed;inset:0;background:rgba(4,18,14,.94);backdrop-filter:blur(8px);z-index:80;display:none;overflow:auto;padding:70px 8vw}
@@ -234,6 +235,7 @@ table.mx{width:100%;border-collapse:collapse;margin-top:18px;background:#fff;bor
   .sdgGrid{grid-template-columns:repeat(4,1fr)}
   .pilG{grid-template-columns:1fr}
   .hero{min-height:220px}
+  #top .ctx{display:none}
 }
 @media print{
   html,body{overflow:visible}
@@ -248,8 +250,8 @@ table.mx{width:100%;border-collapse:collapse;margin-top:18px;background:#fff;bor
 
 <header id="top">
   <div class="brand">
-    <svg width="26" height="26" viewBox="0 0 26 26"><path d="M13 1l10.4 6v12L13 25 2.6 19V7L13 1z" fill="#00876b"/><path d="M13 7.5l4.8 2.8v5.4L13 18.5l-4.8-2.8v-5.4L13 7.5z" fill="#c9a227"/></svg>
-    CREATIVITY OASIS <span style="color:var(--mut);font-weight:600">· Programs &amp; Innovation</span>
+    <img class="brandLogo" src="https://cdn.files.salla.network/theme/1428786828/5e31e6e2-8c61-4a98-b78d-f3b735f7d88d.webp" alt="Creativity Oasis logo">
+    <span>CREATIVITY OASIS</span> <span style="color:var(--mut);font-weight:600">· Programs &amp; Innovation</span>
   </div>
   <div class="ctx">After-School Partnership · 2026–2027 · DAS</div>
 </header>
@@ -700,6 +702,7 @@ table.mx{width:100%;border-collapse:collapse;margin-top:18px;background:#fff;bor
       <div class="step fx" style="--d:.36s"><div class="n">4</div><h3>Pilot → Showcase → Scale</h3><p>Maker Showcase, review metrics, scale to the full 2026–27 year.</p></div>
     </div>
     <div class="close fx" style="--d:.45s">
+      <img class="closeLogo" src="https://cdn.files.salla.network/theme/1428786828/5e31e6e2-8c61-4a98-b78d-f3b735f7d88d.webp" alt="Creativity Oasis logo">
       <p style="font-family:'Sora';font-weight:800;font-size:clamp(18px,2.4vw,28px);color:var(--ink);line-height:1.35">Let’s turn <span style="color:var(--teal-d)">DAS students</span> from consumers of technology into creators of the future.</p>
     </div>
   </div>
