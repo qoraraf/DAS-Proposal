@@ -1,0 +1,674 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Makerspace Initiatives Presentation</title>
+  <style>
+    :root {
+      --bg: #0f172a;
+      --panel: rgba(255, 255, 255, 0.08);
+      --panel-border: rgba(255, 255, 255, 0.14);
+      --text: #f8fafc;
+      --muted: #cbd5e1;
+      --accent: #93c5fd;
+      --chip-bg: rgba(59, 130, 246, 0.16);
+      --chip-border: rgba(147, 197, 253, 0.35);
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
+    body {
+      margin: 0;
+      font-family: Arial, Helvetica, sans-serif;
+      background:
+        radial-gradient(circle at top left, rgba(59, 130, 246, 0.18), transparent 30%),
+        radial-gradient(circle at bottom right, rgba(16, 185, 129, 0.14), transparent 25%),
+        var(--bg);
+      color: var(--text);
+      overflow: hidden;
+    }
+
+    .deck {
+      position: relative;
+      width: 100vw;
+      height: 100vh;
+    }
+
+    .slide {
+      position: absolute;
+      inset: 0;
+      padding: 56px 72px 96px;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      opacity: 0;
+      transform: translateX(36px);
+      transition: opacity 0.35s ease, transform 0.35s ease;
+      pointer-events: none;
+    }
+
+    .slide.active {
+      opacity: 1;
+      transform: translateX(0);
+      pointer-events: auto;
+    }
+
+    .title-slide {
+      text-align: center;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .title-slide h1 {
+      margin: 0 0 18px;
+      font-size: 56px;
+      line-height: 1.1;
+    }
+
+    .title-slide .subtitle {
+      max-width: 900px;
+      font-size: 24px;
+      color: var(--muted);
+      line-height: 1.5;
+      margin: 0;
+    }
+
+    .slide h2 {
+      margin: 0 0 10px;
+      font-size: 42px;
+      line-height: 1.15;
+      max-width: 1200px;
+    }
+
+    .slide .section-note {
+      color: var(--accent);
+      text-transform: uppercase;
+      letter-spacing: 0.12em;
+      font-size: 13px;
+      margin: 0 0 14px;
+    }
+
+    .meta-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+      gap: 14px;
+      margin: 22px 0 26px;
+      width: min(1250px, 100%);
+    }
+
+    .card {
+      background: var(--panel);
+      border: 1px solid var(--panel-border);
+      border-radius: 18px;
+      padding: 16px;
+      min-height: 96px;
+    }
+
+    .label {
+      color: var(--accent);
+      font-size: 12px;
+      text-transform: uppercase;
+      letter-spacing: 0.12em;
+      margin-bottom: 8px;
+    }
+
+    .value {
+      font-size: 17px;
+      line-height: 1.45;
+      color: var(--text);
+    }
+
+    .description {
+      max-width: 1200px;
+      font-size: 21px;
+      line-height: 1.65;
+      color: #e2e8f0;
+      margin: 0;
+    }
+
+    .chips {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+    }
+
+    .chip {
+      background: var(--chip-bg);
+      border: 1px solid var(--chip-border);
+      color: #dbeafe;
+      padding: 7px 11px;
+      border-radius: 999px;
+      font-size: 14px;
+      line-height: 1.2;
+    }
+
+    .controls {
+      position: fixed;
+      bottom: 22px;
+      left: 50%;
+      transform: translateX(-50%);
+      display: flex;
+      gap: 12px;
+      z-index: 20;
+    }
+
+    .controls button {
+      border: 1px solid rgba(255, 255, 255, 0.18);
+      background: rgba(255, 255, 255, 0.1);
+      color: white;
+      border-radius: 12px;
+      padding: 11px 18px;
+      font-size: 16px;
+      cursor: pointer;
+    }
+
+    .controls button:hover {
+      background: rgba(255, 255, 255, 0.18);
+    }
+
+    .counter {
+      position: fixed;
+      right: 26px;
+      bottom: 28px;
+      color: var(--muted);
+      font-size: 15px;
+      z-index: 20;
+    }
+
+    .small-note {
+      margin-top: 18px;
+      color: var(--muted);
+      font-size: 16px;
+    }
+
+    @media (max-width: 900px) {
+      .slide {
+        padding: 28px 24px 100px;
+        overflow-y: auto;
+      }
+
+      .title-slide h1 {
+        font-size: 36px;
+      }
+
+      .title-slide .subtitle {
+        font-size: 18px;
+      }
+
+      .slide h2 {
+        font-size: 28px;
+      }
+
+      .description {
+        font-size: 17px;
+      }
+    }
+  </style>
+</head>
+<body>
+  <main class="deck" id="deck">
+
+    <section class="slide title-slide active">
+      <p class="section-note">Makerspace Program Portfolio</p>
+      <h1>Makerspace Initiatives</h1>
+      <p class="subtitle">
+        Title • Description • Proposed by • Age Group • Material Category • Number of Sessions
+      </p>
+      <p class="small-note">Use the arrow keys or the buttons below to navigate.</p>
+    </section>
+
+    <section class="slide">
+      <p class="section-note">Initiative 1</p>
+      <h2>FREEWHEEL | <span dir="auto">دحديرة</span></h2>
+
+      <div class="meta-grid">
+        <div class="card">
+          <div class="label">Proposed by</div>
+          <div class="value">Sedra Abdul Ghaffar A. Basir</div>
+        </div>
+
+        <div class="card">
+          <div class="label">Age group</div>
+          <div class="value">Grades 6–9, approximately 11–15 years</div>
+        </div>
+
+        <div class="card">
+          <div class="label">Number of sessions</div>
+          <div class="value">Not specified</div>
+        </div>
+
+        <div class="card">
+          <div class="label">Material category</div>
+          <div class="chips">
+            <span class="chip">Woodworking</span>
+            <span class="chip">Cardboard & foam prototyping</span>
+            <span class="chip">3D printing</span>
+            <span class="chip">Laser cutting</span>
+            <span class="chip">Electronics</span>
+            <span class="chip">Digital media</span>
+          </div>
+        </div>
+      </div>
+
+      <p class="description">
+        A hands-on after-school adventure where students design, build, brand, and race their own gravity-powered cars.
+        The program combines woodworking, 3D design, electronics, filmmaking, sponsorship, and Saudi-inspired branding.
+        It ends with the Freewheel Festival, where teams reveal their cars, tell their stories, and race for glory.
+      </p>
+    </section>
+
+    <section class="slide">
+      <p class="section-note">Initiative 2</p>
+      <h2>Sumo Robotics Tournament</h2>
+
+      <div class="meta-grid">
+        <div class="card">
+          <div class="label">Proposed by</div>
+          <div class="value">Sulaiman Alnajdi</div>
+        </div>
+
+        <div class="card">
+          <div class="label">Age group</div>
+          <div class="value">Not specified</div>
+        </div>
+
+        <div class="card">
+          <div class="label">Number of sessions</div>
+          <div class="value">Not specified — described as a hardware sprint</div>
+        </div>
+
+        <div class="card">
+          <div class="label">Material category</div>
+          <div class="chips">
+            <span class="chip">3D printing</span>
+            <span class="chip">Electronics</span>
+            <span class="chip">Motors & wheels</span>
+            <span class="chip">Cardboard prototyping</span>
+            <span class="chip">CAD</span>
+            <span class="chip">Robotics</span>
+          </div>
+        </div>
+      </div>
+
+      <p class="description">
+        A high-energy hardware sprint where students design and build custom 3D-printed Sumo robots.
+        Teams engineer sturdy chassis, strategic deflectors, and drivetrain systems while testing and iterating in a competitive ring.
+        The program ends with a final bracket-style tournament.
+      </p>
+    </section>
+
+    <section class="slide">
+      <p class="section-note">Initiative 3</p>
+      <h2>The Bionic Build</h2>
+
+      <div class="meta-grid">
+        <div class="card">
+          <div class="label">Proposed by</div>
+          <div class="value">Sulaiman Alnajdi</div>
+        </div>
+
+        <div class="card">
+          <div class="label">Age group</div>
+          <div class="value">Not specified</div>
+        </div>
+
+        <div class="card">
+          <div class="label">Number of sessions</div>
+          <div class="value">Not specified — described as an engineering sprint</div>
+        </div>
+
+        <div class="card">
+          <div class="label">Material category</div>
+          <div class="chips">
+            <span class="chip">3D printing</span>
+            <span class="chip">Electronics</span>
+            <span class="chip">Servos</span>
+            <span class="chip">Arduino / Micro:bit</span>
+            <span class="chip">Mechanical fasteners</span>
+            <span class="chip">CAD</span>
+          </div>
+        </div>
+      </div>
+
+      <p class="description">
+        An engineering sprint where students design, 3D print, and program a robotic arm.
+        Participants move from biomechanics and CAD design to electronics, coding, and hardware assembly.
+        The challenge ends with The Bionic Trials, a time-bound precision sorting event.
+      </p>
+    </section>
+
+    <section class="slide">
+      <p class="section-note">Initiative 4</p>
+      <h2>Environmental Art</h2>
+
+      <div class="meta-grid">
+        <div class="card">
+          <div class="label">Proposed by</div>
+          <div class="value">Osama</div>
+        </div>
+
+        <div class="card">
+          <div class="label">Age group</div>
+          <div class="value">10–18 years</div>
+        </div>
+
+        <div class="card">
+          <div class="label">Number of sessions</div>
+          <div class="value">36 sessions over 12 weeks, 3 days per week</div>
+        </div>
+
+        <div class="card">
+          <div class="label">Material category</div>
+          <div class="chips">
+            <span class="chip">Recycled materials</span>
+            <span class="chip">Upcycled materials</span>
+            <span class="chip">Art & craft</span>
+            <span class="chip">Cardboard & plastics</span>
+            <span class="chip">Paint & adhesives</span>
+          </div>
+        </div>
+      </div>
+
+      <p class="description">
+        “Our Ocean Is Crying” is an environmental art project where students create an aquarium-style installation from recycled and upcycled materials.
+        The initiative combines sustainability, creativity, and hands-on making.
+        Students transform waste materials into a meaningful artistic exhibition.
+      </p>
+    </section>
+
+    <section class="slide">
+      <p class="section-note">Initiative 5</p>
+      <h2>Behind the Mask | The Scene Makers</h2>
+
+      <div class="meta-grid">
+        <div class="card">
+          <div class="label">Proposed by</div>
+          <div class="value">alkabbanih</div>
+        </div>
+
+        <div class="card">
+          <div class="label">Age group</div>
+          <div class="value">12–16 years</div>
+        </div>
+
+        <div class="card">
+          <div class="label">Number of sessions</div>
+          <div class="value">Approximately 42 sessions over 14 weeks, 3 days per week</div>
+        </div>
+
+        <div class="card">
+          <div class="label">Material category</div>
+          <div class="chips">
+            <span class="chip">Costume design</span>
+            <span class="chip">Mask making</span>
+            <span class="chip">Fabric & felt</span>
+            <span class="chip">Foam & cardboard</span>
+            <span class="chip">Paint & craft tools</span>
+            <span class="chip">Theatre props</span>
+          </div>
+        </div>
+      </div>
+
+      <p class="description">
+        A multidisciplinary creative workshop that combines storytelling, acting, and costume design.
+        Participants create an original Saudi-inspired story, develop its characters and visual identity, and transform their ideas into a live theatrical performance.
+        The final output is a Saudi-inspired theatrical performance.
+      </p>
+    </section>
+
+    <section class="slide">
+      <p class="section-note">Initiative 6</p>
+      <h2><span dir="auto">هندسة الورق المتحرك</span> | Kinetic Paper Engineering</h2>
+
+      <div class="meta-grid">
+        <div class="card">
+          <div class="label">Proposed by</div>
+          <div class="value">Asmaa Sinan</div>
+        </div>
+
+        <div class="card">
+          <div class="label">Age group</div>
+          <div class="value">10–14 years</div>
+        </div>
+
+        <div class="card">
+          <div class="label">Number of sessions</div>
+          <div class="value">Not specified</div>
+        </div>
+
+        <div class="card">
+          <div class="label">Material category</div>
+          <div class="chips">
+            <span class="chip">Paper</span>
+            <span class="chip">Cardstock</span>
+            <span class="chip">Folding & scoring tools</span>
+            <span class="chip">Glue & tape</span>
+            <span class="chip">Cutting mats</span>
+          </div>
+        </div>
+      </div>
+
+      <p class="description">
+        This initiative explores how flat paper can become moving 3D structures through folding, geometry, and repeated patterns.
+        Students create kinetic works such as Hexaflexagon, Infinite Star, Moving Cubes, Kaleidocycles, and Transforming Origami.
+        The final outcome includes a student-designed kinetic paper work.
+      </p>
+    </section>
+
+    <section class="slide">
+      <p class="section-note">Initiative 7</p>
+      <h2>Building a Robot</h2>
+
+      <div class="meta-grid">
+        <div class="card">
+          <div class="label">Proposed by</div>
+          <div class="value">Asmaa Sinan</div>
+        </div>
+
+        <div class="card">
+          <div class="label">Age group</div>
+          <div class="value">Not specified</div>
+        </div>
+
+        <div class="card">
+          <div class="label">Number of sessions</div>
+          <div class="value">4–5 build and refinement sessions, plus workshops</div>
+        </div>
+
+        <div class="card">
+          <div class="label">Material category</div>
+          <div class="chips">
+            <span class="chip">3D printing</span>
+            <span class="chip">Laser cutting</span>
+            <span class="chip">Arduino</span>
+            <span class="chip">Electronics</span>
+            <span class="chip">Motors / servos</span>
+            <span class="chip">Chassis materials</span>
+          </div>
+        </div>
+      </div>
+
+      <p class="description">
+        A robotics building initiative where students create projects such as a robot hand, eyeballs, car, or Otto robot.
+        The program includes workshops in 3D printing, laser cutting, and Arduino.
+        Students then spend focused sessions building and refining their robot.
+      </p>
+    </section>
+
+    <section class="slide">
+      <p class="section-note">Initiative 8</p>
+      <h2>Data Analysis | Data Explorers</h2>
+
+      <div class="meta-grid">
+        <div class="card">
+          <div class="label">Proposed by</div>
+          <div class="value">Asmaa Sinan</div>
+        </div>
+
+        <div class="card">
+          <div class="label">Age group</div>
+          <div class="value">13–16 years</div>
+        </div>
+
+        <div class="card">
+          <div class="label">Number of sessions</div>
+          <div class="value">Not specified</div>
+        </div>
+
+        <div class="card">
+          <div class="label">Material category</div>
+          <div class="chips">
+            <span class="chip">Computers / laptops</span>
+            <span class="chip">Excel</span>
+            <span class="chip">Python</span>
+            <span class="chip">Google Colab</span>
+            <span class="chip">Datasets</span>
+            <span class="chip">Data visualization tools</span>
+          </div>
+        </div>
+      </div>
+
+      <p class="description">
+        Data Explorers is a journey from data to discovery.
+        Students learn the fundamentals of data science, from organizing and analyzing data in Excel to writing their first lines of Python in Google Colab.
+        The workshop ends with an interactive data project that students present live to their families.
+      </p>
+    </section>
+
+    <section class="slide">
+      <p class="section-note">Initiative 9</p>
+      <h2>Smart Home</h2>
+
+      <div class="meta-grid">
+        <div class="card">
+          <div class="label">Proposed by</div>
+          <div class="value">Ali Al-Ariqi</div>
+        </div>
+
+        <div class="card">
+          <div class="label">Age group</div>
+          <div class="value">Not specified</div>
+        </div>
+
+        <div class="card">
+          <div class="label">Number of sessions</div>
+          <div class="value">Not specified</div>
+        </div>
+
+        <div class="card">
+          <div class="label">Material category</div>
+          <div class="chips">
+            <span class="chip">Arduino / microcontrollers</span>
+            <span class="chip">Sensors</span>
+            <span class="chip">Electronics & wiring</span>
+            <span class="chip">LEDs & buzzers</span>
+            <span class="chip">Cardboard / wood / foam board</span>
+          </div>
+        </div>
+      </div>
+
+      <p class="description">
+        A hands-on project where students design and build a miniature smart home model.
+        They equip it with multiple sensors and control systems to make the home safer, more comfortable, and more efficient.
+        Students learn electronics, sensor wiring, programming, automation, testing, and final presentation.
+      </p>
+    </section>
+
+    <section class="slide">
+      <p class="section-note">Initiative 10</p>
+      <h2>Smart City</h2>
+
+      <div class="meta-grid">
+        <div class="card">
+          <div class="label">Proposed by</div>
+          <div class="value">Ali Al-Ariqi</div>
+        </div>
+
+        <div class="card">
+          <div class="label">Age group</div>
+          <div class="value">Not specified</div>
+        </div>
+
+        <div class="card">
+          <div class="label">Number of sessions</div>
+          <div class="value">Not specified</div>
+        </div>
+
+        <div class="card">
+          <div class="label">Material category</div>
+          <div class="chips">
+            <span class="chip">Arduino / microcontrollers</span>
+            <span class="chip">Sensors</span>
+            <span class="chip">LEDs & traffic lights</span>
+            <span class="chip">Motors</span>
+            <span class="chip">Electronics & wiring</span>
+            <span class="chip">City model materials</span>
+          </div>
+        </div>
+      </div>
+
+      <p class="description">
+        A hands-on project where students design and build a miniature smart city equipped with sensors, automated systems, and connected technologies.
+        Students explore smart lighting, traffic systems, parking, environmental monitoring, safety systems, and data display.
+        The final outcome is a functional smart city model that addresses real-world urban challenges.
+      </p>
+    </section>
+
+  </main>
+
+  <div class="controls">
+    <button id="prevBtn" type="button">← Previous</button>
+    <button id="nextBtn" type="button">Next →</button>
+  </div>
+
+  <div class="counter" id="counter">1 / 11</div>
+
+  <script>
+    const slides = Array.from(document.querySelectorAll(".slide"));
+    const counter = document.getElementById("counter");
+    const prevBtn = document.getElementById("prevBtn");
+    const nextBtn = document.getElementById("nextBtn");
+    let current = 0;
+
+    function updateCounter() {
+      counter.textContent = (current + 1) + " / " + slides.length;
+    }
+
+    function showSlide(index) {
+      if (index < 0) index = 0;
+      if (index >= slides.length) index = slides.length - 1;
+
+      slides[current].classList.remove("active");
+      current = index;
+      slides[current].classList.add("active");
+      updateCounter();
+    }
+
+    prevBtn.addEventListener("click", () => showSlide(current - 1));
+    nextBtn.addEventListener("click", () => showSlide(current + 1));
+
+    document.addEventListener("keydown", (event) => {
+      if (event.key === "ArrowRight" || event.key === "PageDown" || event.key === " ") {
+        showSlide(current + 1);
+      }
+
+      if (event.key === "ArrowLeft" || event.key === "PageUp") {
+        showSlide(current - 1);
+      }
+
+      if (event.key === "Home") {
+        showSlide(0);
+      }
+
+      if (event.key === "End") {
+        showSlide(slides.length - 1);
+      }
+    });
+
+    updateCounter();
+  </script>
+</body>
+</html>
